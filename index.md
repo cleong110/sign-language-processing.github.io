@@ -208,14 +208,15 @@ These annotations fail to capture all the information expressed simultaneously t
 such as body posture, eye gaze, or spatial relations, leading to a loss of information that can significantly affect downstream performance on SLP tasks [@yin-read-2020-better;@muller-etal-2023-considerations].
 
 @muller-etal-2023-considerations conduct an extensive review of the use of glosses in sign language translation research and make the following recommendations for research using glosses:
-* Demonstrate awareness of limitations of gloss approaches and explicitly discuss them.
-* Focus on datasets beyond RWTH-PHOENIX-Weather-2014T [@cihan2018neural]. 
+
+- Demonstrate awareness of limitations of gloss approaches and explicitly discuss them.
+- Focus on datasets beyond RWTH-PHOENIX-Weather-2014T [@cihan2018neural]. 
 Openly discuss the limited size and linguistic domain of this dataset.
-* Use metrics that are well-established in MT.
+- Use metrics that are well-established in MT.
 If BLEU [@papineni-etal-2002-bleu] is used, compute it with SacreBLEU [@post-2018-call-sacrebleu], report metric signatures and disable internal tokenization for gloss outputs. 
 Do not compare to scores produced with a different or unknown evaluation procedure.
-* Given that glossing is corpus-specific, process glosses in a corpus-specific way, informed by transcription conventions.
-* Optimize gloss translation baselines with methods shown to be effective for low-resource MT.
+- Given that glossing is corpus-specific, process glosses in a corpus-specific way, informed by transcription conventions.
+- Optimize gloss translation baselines with methods shown to be effective for low-resource MT.
 
 
 The following table additionally exemplifies the various representations for more isolated signs.
@@ -770,6 +771,20 @@ In training, the VQ-Sign "character-level" module is trained with a context pred
 The framework achieves state-of-the-art results on the RWTH-PHOENIX-Weather-2014T [@cihan2018neural] and CSL-Daily [@dataset:huang2018video] datasets without relying on gloss annotations.
 <!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: c.f. SignLLM with https://github.com/sign-language-processing/sign-vq? -->
 
+<!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: YoutubeASL explanation would fit nicely here before Rust et al 2024. They don't just do data IIRC. -->
+
+@rust2024PrivacyAwareSign introduce a two-stage privacy-aware method for sign language translation (SLT) at scale, termed Self-Supervised Video Pretraining for Sign Language Translation (SSVP-SLT). 
+The first stage involves self-supervised pretraining of a Hiera vision transformer [@ryali2023HieraVisionTransformer] on large unannotated video datasets [@dataset:duarte2020how2sign, @dataset:uthus2023YoutubeASL]. 
+In the second stage, the vision model's outputs are fed into a multilingual language model [@raffel2020T5Transformer] for finetuning on the How2Sign dataset [@dataset:duarte2020how2sign].
+To mitigate privacy risks, the framework employs facial blurring during pretraining.
+They find that while pretraining with blurring hurts performance, some can be recovered when finetuning with unblurred data.
+SSVP-SLT achieves state-of-the-art performance on How2Sign [@dataset:duarte2020how2sign].
+They conclude that SLT models can be pretrained in a privacy-aware manner without sacrificing too much performance.
+Additionally, the authors release DailyMoth-70h, a new 70-hour ASL dataset from [The Daily Moth](https://www.dailymoth.com/).
+
+<!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: BLEURT explanation -->
+<!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: add DailyMoth to datasets list. Table 8 has stats: 497 videos, 70 hours, 1 signer, vocabulary of words 19 740, segmented video clips, -->
+
 <!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: AFRISIGN (Shester and Mathias at AfricaNLP, ICLR 2023 workshop) -->
 
 #### Text-to-Video
@@ -1012,6 +1027,7 @@ sign language resources are scarce and, currently only support translation and p
 Unfortunately, most of the sign language corpora discussed in the literature are either not available for use or available under heavy restrictions and licensing terms. 
 Furthermore, sign language data is especially challenging to anonymize due to the importance of facial and other physical features in signing videos, limiting its open distribution. Developing anonymization with minimal information loss or accurate anonymous representations is a promising research direction.
 
+<!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: a discussion on anonymization methods, including the thoughts of @rust2024PrivacyAwareSign, who mention a few approaches and cite them. They also argue that poses "do not offer meaningful privacy protection either" (Appendix A).  -->
 
 ### Collect Real-World Data
 
@@ -1151,7 +1167,7 @@ Emailed Eleni and Evita; I need to make sure data is available.
 | [AUSLAN](https://elar.soas.ac.uk/Collection/MPI55247) | @dataset:johnston2010archive | Australian | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> |  | 1,100 Videos | 100 |  |
 | [AUTSL](http://chalearnlap.cvc.uab.es/dataset/40/description/) [💾](https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/autsl) | @dataset:sincan2020autsl | Turkish | <span title="video:RGBD">🎥</span><span title="gloss:TİD">📋</span> | 226 | 36,302 Samples | 43 | [Codalab](https://competitions.codalab.org/competitions/27901#participate) |
 | [BOBSL](https://www.robots.ox.ac.uk/~vgg/data/bobsl/) | @dataset:momeniAutomaticDenseAnnotation2022 | British | <span title="video:RGB">🎥</span><span title="text:English">📜</span> | 2,281 | 1.2M Sentences | 37 | [non-commercial authorized academics](https://www.bbc.co.uk/rd/projects/extol-dataset) |
-| [BosphorusSign](https://www.cmpe.boun.edu.tr/pilab/BosphorusSign/bosphorusSign_en.html) | @dataset:camgoz-etal-2016-bosphorussign | Turkish | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> | 636 | 24,161 Samples | 6 | Not Published |
+| [BosphorusSign](https://ogulcanozdemir.github.io/bosphorussign22k/) | @dataset:camgoz-etal-2016-bosphorussign | Turkish | <span title="video:RGBD">🎥</span><span title="pose:Kinectv2">👋</span><span title="gloss">📋</span> | 855 (595 public) | 22k+ (22,670 public) | 6 | [Research purpose on request](https://ogulcanozdemir.github.io/bosphorussign22k/#description) |
 | [BSL Corpus](https://bslcorpusproject.org/) [💾](https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/bsl_corpus) | @dataset:schembri2013building | British | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> |  | 40,000 Lexical Items | 249 | [Partially Restricted](https://bslcorpusproject.org/cava/restricted-access-data/) |
 | [CDPSL](https://www.slownikpjm.uw.edu.pl/en) | @dataset:acheta2014ACD | Polish | <span title="video">🎥</span><span title="writing:HamNoSys">✍</span><span title="text:Polish">📜</span> |  | 300 hours |  |  |
 | [ChicagoFSWild](https://ttic.uchicago.edu/~klivescu/ChicagoFSWild.htm) [💾](https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/chicagofswild) | @dataset:fs18slt | American | <span title="video">🎥</span><span title="text:Fingerspelling">📜</span> | 26 | 7,304 Sequences | 160 | Public |
@@ -1168,7 +1184,7 @@ Emailed Eleni and Evita; I need to make sure data is available.
 | KETI | @dataset:ko2019neural | Korean | <span title="video">🎥</span><span title="pose:OpenPose">👋</span><span title="gloss:KSL">📋</span><span title="text:Korean">📜</span> | 524 | 14,672 Videos | 14 | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> (emailed Sang-Ki Ko) |
 | [KRSL-OnlineSchool](https://krslproject.github.io/online-school/) | @dataset:mukushev2022towards | Kazakh-Russian | <span title="video">🎥</span><span title="gloss">📋</span><span title="text:Kazakh-Russian">📜</span> |  | 890 Hours (1M sentences) | 7 |  |
 | [LSE-SIGN](https://link.springer.com/content/pdf/10.3758/s13428-014-0560-1.pdf) | @dataset:gutierrez2016lse | Spanish | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> | 2,400 | 2,400 Samples | 2 | [Custom](http://lse-sign.bcbl.eu/web-busqueda/?page_id=8) |
-| [MS-ASL](https://www.microsoft.com/en-us/download/details.aspx?id=100121) | @dataset:joze2018ms | American | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> | 1,000 | 25,000 (25 hours) | 200 | Public |
+| [MS-ASL](https://www.microsoft.com/en-us/download/details.aspx?id=100121) | @dataset:joze2018ms | American | <span title="video:RGB">🎥</span><span title="gloss">📋</span> | 1,000 | 25,513 (~25 hours) | 222 | Public |
 | [NCSLGR](https://www.bu.edu/asllrp/ncslgr.html) [💾](https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/ncslgr) | @dataset:databases2007volumes | American | <span title="video">🎥</span><span title="gloss:ASL">📋</span><span title="text:English">📜</span> |  | 1,875 sentences | 4 | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> |
 | [Public DGS Corpus](https://www.sign-lang.uni-hamburg.de/dgs-korpus/index.php/welcome.html) [💾](https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/dgs_corpus) | @dataset:prillwitz2008dgs | German | <span title="video:Front">🎥</span><span title="video:Side">🎥</span><span title="pose:OpenPose">👋</span><span title="mouthing">👄</span><span title="writing:HamNoSys">✍</span><span title="gloss:DGS">📋</span><span title="text:German">📜</span><span title="text:English">📜</span> |  | 50 Hours | 330 | [Custom](https://www.sign-lang.uni-hamburg.de/meinedgs/ling/license_en.html) |
 | [RVL-SLLL ASL](https://engineering.purdue.edu/RVL/Database/ASL/asl-database-front.htm) | @dataset:martinez2002purdue | American | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> | 104 | 2,576 Videos | 14 | [Research Attribution](https://engineering.purdue.edu/RVL/Database/ASL/Agreement.pdf) |

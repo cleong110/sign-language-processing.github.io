@@ -206,7 +206,14 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <section id="glosses" class="unnumbered">
 <h6 class="unnumbered">Glosses</h6>
 <p>are the transcription of signed languages sign-by-sign, with each sign having a unique semantic identifier. While various sign language corpus projects have provided guidelines for gloss annotation <span class="citation" data-cites="mesch2015gloss johnston2016auslan konrad2018public">(Mesch and Wallin <a href="#ref-mesch2015gloss" role="doc-biblioref">2015</a>; Johnston and De Beuzeville <a href="#ref-johnston2016auslan" role="doc-biblioref">2016</a>; Konrad et al. <a href="#ref-konrad2018public" role="doc-biblioref">2018</a>)</span>, a standardized gloss annotation protocol has yet to be established. Linear gloss annotations have been criticized for their imprecise representation of signed language. These annotations fail to capture all the information expressed simultaneously through different cues, such as body posture, eye gaze, or spatial relations, leading to a loss of information that can significantly affect downstream performance on SLP tasks <span class="citation" data-cites="yin-read-2020-better muller-etal-2023-considerations">(Yin and Read <a href="#ref-yin-read-2020-better" role="doc-biblioref">2020</a>; Müller et al. <a href="#ref-muller-etal-2023-considerations" role="doc-biblioref">2023</a>)</span>.</p>
-<p><span class="citation" data-cites="muller-etal-2023-considerations">Müller et al. (<a href="#ref-muller-etal-2023-considerations" role="doc-biblioref">2023</a>)</span> conduct an extensive review of the use of glosses in sign language translation research and make the following recommendations for research using glosses: * Demonstrate awareness of limitations of gloss approaches and explicitly discuss them. * Focus on datasets beyond RWTH-PHOENIX-Weather-2014T <span class="citation" data-cites="cihan2018neural">(Camgöz et al. <a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span>. Openly discuss the limited size and linguistic domain of this dataset. * Use metrics that are well-established in MT. If BLEU <span class="citation" data-cites="papineni-etal-2002-bleu">(Papineni et al. <a href="#ref-papineni-etal-2002-bleu" role="doc-biblioref">2002</a>)</span> is used, compute it with SacreBLEU <span class="citation" data-cites="post-2018-call-sacrebleu">(Post <a href="#ref-post-2018-call-sacrebleu" role="doc-biblioref">2018</a>)</span>, report metric signatures and disable internal tokenization for gloss outputs. Do not compare to scores produced with a different or unknown evaluation procedure. * Given that glossing is corpus-specific, process glosses in a corpus-specific way, informed by transcription conventions. * Optimize gloss translation baselines with methods shown to be effective for low-resource MT.</p>
+<p><span class="citation" data-cites="muller-etal-2023-considerations">Müller et al. (<a href="#ref-muller-etal-2023-considerations" role="doc-biblioref">2023</a>)</span> conduct an extensive review of the use of glosses in sign language translation research and make the following recommendations for research using glosses:</p>
+<ul>
+<li>Demonstrate awareness of limitations of gloss approaches and explicitly discuss them.</li>
+<li>Focus on datasets beyond RWTH-PHOENIX-Weather-2014T <span class="citation" data-cites="cihan2018neural">(Camgöz et al. <a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span>. Openly discuss the limited size and linguistic domain of this dataset.</li>
+<li>Use metrics that are well-established in MT. If BLEU <span class="citation" data-cites="papineni-etal-2002-bleu">(Papineni et al. <a href="#ref-papineni-etal-2002-bleu" role="doc-biblioref">2002</a>)</span> is used, compute it with SacreBLEU <span class="citation" data-cites="post-2018-call-sacrebleu">(Post <a href="#ref-post-2018-call-sacrebleu" role="doc-biblioref">2018</a>)</span>, report metric signatures and disable internal tokenization for gloss outputs. Do not compare to scores produced with a different or unknown evaluation procedure.</li>
+<li>Given that glossing is corpus-specific, process glosses in a corpus-specific way, informed by transcription conventions.</li>
+<li>Optimize gloss translation baselines with methods shown to be effective for low-resource MT.</li>
+</ul>
 <p>The following table additionally exemplifies the various representations for more isolated signs. For this example, we use SignWriting as the notation system. Note that the same sign might have two unrelated glosses, and the same gloss might have multiple valid spoken language translations.</p>
 <div id="formats-table" class="table">
 <table>
@@ -373,6 +380,10 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <p><span class="citation" data-cites="Zhao_Zhang_Fu_Hu_Su_Chen_2024">Zhao et al. (<a href="#ref-Zhao_Zhang_Fu_Hu_Su_Chen_2024" role="doc-biblioref">2024</a>)</span> introduce CV-SLT, employing conditional variational autoencoders to address the modality gap between video and text. Their approach involves guiding the model to encode visual and textual data similarly through two paths: one with visual data alone and one with both modalities. Using KL divergences, they steer the model towards generating consistent embeddings and accurate outputs regardless of the path. Once the model achieves consistent performance across paths, it can be utilized for translation without gloss supervision. Evaluation on the RWTH-PHOENIX-Weather-2014T <span class="citation" data-cites="cihan2018neural">(Camgöz et al. <a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span> and CSL-Daily <span class="citation" data-cites="dataset:huang2018video">(Huang et al. <a href="#ref-dataset:huang2018video" role="doc-biblioref">2018</a>)</span> datasets demonstrates its efficacy. They provide a <a href="https://github.com/rzhao-zhsq/CV-SLT">code implementation</a> based largely on <span class="citation" data-cites="chenSimpleMultiModalityTransfer2022a">Yutong Chen, Wei, et al. (<a href="#ref-chenSimpleMultiModalityTransfer2022a" role="doc-biblioref">2022</a>)</span>. <!-- The CV-SLT code looks pretty nice! Conda env file, data prep, not too old, paths in .yaml files, checkpoints provided (including the ones for replication), commands to train and evaluate, very nice --></p>
 <!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: the "previous gloss-free frameworks" that gongLLMsAreGood2024 cite are: Gloss Attention for Gloss-free Sign Language Translation (2023) and Gloss-free sign language translation: Improving from visual-language pretraining, 2023 aka GFSLT-VLP. Could be good to lead into it with explanations of those? -->
 <p><span class="citation" data-cites="gongLLMsAreGood2024">Gong et al. (<a href="#ref-gongLLMsAreGood2024" role="doc-biblioref">2024</a>)</span> introduce SignLLM, a framework for gloss-free sign language translation that leverages the strengths of Large Language Models (LLMs). SignLLM converts sign videos into discrete and hierarchical representations compatible with LLMs through two modules: (1) The Vector-Quantized Visual Sign (VQ-Sign) module, which translates sign videos into discrete “character-level” tokens, and (2) the Codebook Reconstruction and Alignment (CRA) module, which restructures these tokens into “word-level” representations. During inference, the “word-level” tokens are projected into the LLM’s embedding space, which is then prompted for translation. The LLM itself can be taken “off the shelf” and does not need to be trained. In training, the VQ-Sign “character-level” module is trained with a context prediction task, the CRA “word-level” module with an optimal transport technique, and a sign-text alignment loss further enhances the semantic alignment between sign and text tokens. The framework achieves state-of-the-art results on the RWTH-PHOENIX-Weather-2014T <span class="citation" data-cites="cihan2018neural">(Camgöz et al. <a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span> and CSL-Daily <span class="citation" data-cites="dataset:huang2018video">(Huang et al. <a href="#ref-dataset:huang2018video" role="doc-biblioref">2018</a>)</span> datasets without relying on gloss annotations. <!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: c.f. SignLLM with https://github.com/sign-language-processing/sign-vq? --></p>
+<!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: YoutubeASL explanation would fit nicely here before Rust et al 2024. They don't just do data IIRC. -->
+<p><span class="citation" data-cites="rust2024PrivacyAwareSign">Rust et al. (<a href="#ref-rust2024PrivacyAwareSign" role="doc-biblioref">2024</a>)</span> introduce a two-stage privacy-aware method for sign language translation (SLT) at scale, termed Self-Supervised Video Pretraining for Sign Language Translation (SSVP-SLT). The first stage involves self-supervised pretraining of a Hiera vision transformer <span class="citation" data-cites="ryali2023HieraVisionTransformer">(Ryali et al. <a href="#ref-ryali2023HieraVisionTransformer" role="doc-biblioref">2023</a>)</span> on large unannotated video datasets <span class="citation" data-cites="dataset:duarte2020how2sign">(Duarte et al. <a href="#ref-dataset:duarte2020how2sign" role="doc-biblioref">2021</a>, @dataset:uthus2023YoutubeASL)</span>. In the second stage, the vision model’s outputs are fed into a multilingual language model <span class="citation" data-cites="raffel2020T5Transformer">(Raffel et al. <a href="#ref-raffel2020T5Transformer" role="doc-biblioref">2020</a>)</span> for finetuning on the How2Sign dataset <span class="citation" data-cites="dataset:duarte2020how2sign">(Duarte et al. <a href="#ref-dataset:duarte2020how2sign" role="doc-biblioref">2021</a>)</span>. To mitigate privacy risks, the framework employs facial blurring during pretraining. They find that while pretraining with blurring hurts performance, some can be recovered when finetuning with unblurred data. SSVP-SLT achieves state-of-the-art performance on How2Sign <span class="citation" data-cites="dataset:duarte2020how2sign">(Duarte et al. <a href="#ref-dataset:duarte2020how2sign" role="doc-biblioref">2021</a>)</span>. They conclude that SLT models can be pretrained in a privacy-aware manner without sacrificing too much performance. Additionally, the authors release DailyMoth-70h, a new 70-hour ASL dataset from <a href="https://www.dailymoth.com/">The Daily Moth</a>.</p>
+<!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: BLEURT explanation -->
+<!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: add DailyMoth to datasets list. Table 8 has stats: 497 videos, 70 hours, 1 signer, vocabulary of words 19 740, segmented video clips, -->
 <!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: AFRISIGN (Shester and Mathias at AfricaNLP, ICLR 2023 workshop) -->
 <h4 id="text-to-video">Text-to-Video</h4>
 <p>Text-to-Video, also known as sign language production, is the task of producing a video that adequately represents a spoken language text in sign language.</p>
@@ -450,6 +461,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <section id="availability" class="unnumbered">
 <h6 class="unnumbered">Availability</h6>
 <p>Unlike the vast amount and diversity of available spoken language resources that allow various applications, sign language resources are scarce and, currently only support translation and production. Unfortunately, most of the sign language corpora discussed in the literature are either not available for use or available under heavy restrictions and licensing terms. Furthermore, sign language data is especially challenging to anonymize due to the importance of facial and other physical features in signing videos, limiting its open distribution. Developing anonymization with minimal information loss or accurate anonymous representations is a promising research direction.</p>
+<!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: a discussion on anonymization methods, including the thoughts of @rust2024PrivacyAwareSign, who mention a few approaches and cite them. They also argue that poses "do not offer meaningful privacy protection either" (Appendix A).  -->
 </section>
 <h3 id="collect-real-world-data">Collect Real-World Data</h3>
 <p>Data is essential to develop any of the core NLP tools previously described, and current efforts in SLP are often limited by the lack of adequate data. We discuss the considerations to keep in mind when building datasets, the challenges of collecting such data, and directions to facilitate data collection.</p>
@@ -633,14 +645,14 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td><a href="https://www.bbc.co.uk/rd/projects/extol-dataset">non-commercial authorized academics</a></td>
 </tr>
 <tr class="even">
-<td><a href="https://www.cmpe.boun.edu.tr/pilab/BosphorusSign/bosphorusSign_en.html">BosphorusSign</a></td>
+<td><a href="https://ogulcanozdemir.github.io/bosphorussign22k/">BosphorusSign</a></td>
 <td><span class="citation" data-cites="dataset:camgoz-etal-2016-bosphorussign">Camgöz et al. (<a href="#ref-dataset:camgoz-etal-2016-bosphorussign" role="doc-biblioref">2016</a>)</span></td>
 <td>Turkish</td>
-<td><span style="background-color: red; color: white; padding: 0 2px !important;"><strong>TODO</strong></span></td>
-<td>636</td>
-<td>24,161 Samples</td>
+<td><span title="video:RGBD">🎥</span><span title="pose:Kinectv2">👋</span><span title="gloss">📋</span></td>
+<td>855 (595 public)</td>
+<td>22k+ (22,670 public)</td>
 <td>6</td>
-<td>Not Published</td>
+<td><a href="https://ogulcanozdemir.github.io/bosphorussign22k/#description">Research purpose on request</a></td>
 </tr>
 <tr class="odd">
 <td><a href="https://bslcorpusproject.org/">BSL Corpus</a> <a href="https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/bsl_corpus">💾</a></td>
@@ -806,10 +818,10 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td><a href="https://www.microsoft.com/en-us/download/details.aspx?id=100121">MS-ASL</a></td>
 <td><span class="citation" data-cites="dataset:joze2018ms">Joze and Koller (<a href="#ref-dataset:joze2018ms" role="doc-biblioref">2019</a>)</span></td>
 <td>American</td>
-<td><span style="background-color: red; color: white; padding: 0 2px !important;"><strong>TODO</strong></span></td>
+<td><span title="video:RGB">🎥</span><span title="gloss">📋</span></td>
 <td>1,000</td>
-<td>25,000 (25 hours)</td>
-<td>200</td>
+<td>25,513 (~25 hours)</td>
+<td>222</td>
 <td>Public</td>
 </tr>
 <tr class="even">
@@ -1366,7 +1378,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <p>Liddell, Scott K, and others. 2003. <em>Grammar, Gesture, and Meaning in American Sign Language</em>. Cambridge University Press.</p>
 </div>
 <div id="ref-liu-etal-2020-multilingual-denoising">
-<p>Liu, Yinhan, Jiatao Gu, Naman Goyal, Xian Li, Sergey Edunov, Marjan Ghazvininejad, Mike Lewis, and Luke Zettlemoyer. 2020. “Multilingual Denoising Pre-Training for Neural Machine Translation.” Edited by Mark Johnson, Brian Roark, and Ani Nenkova. <em>Transactions of the Association for Computational Linguistics</em> 8: 726–42. <a href="https://doi.org/10.1162/tacl_a_00343">https://doi.org/10.1162/tacl_a_00343</a>.</p>
+<p>Liu, Yinhan, Jiatao Gu, Naman Goyal, Xian Li, Sergey Edunov, Marjan Ghazvininejad, Mike Lewis, and Luke Zettlemoyer. 2020. “Multilingual Denoising Pre-Training for Neural Machine Translation.” <em>Transactions of the Association for Computational Linguistics</em> 8: 726–42. <a href="https://doi.org/10.1162/tacl_a_00343">https://doi.org/10.1162/tacl_a_00343</a>.</p>
 </div>
 <div id="ref-pympi-1.69">
 <p>Lubbers, Mart, and Francisco Torreira. 2013. “Pympi-Ling: A Python Module for Processing ELANs EAF and Praats TextGrid Annotation Files.” <a href="https://pypi.python.org/pypi/pympi-ling">https://pypi.python.org/pypi/pympi-ling</a>.</p>
@@ -1504,7 +1516,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <p>Pizzuto, Elena Antinoro, Paolo Rossini, and Tommaso Russo. 2006. “Representing Signed Languages in Written Form: Questions That Need to Be Posed.” In <em>5th International Conference on Language Resources and Evaluation (LREC 2006)</em>, edited by Chiara Vettori, 1–6. Genoa, Italy: European Language Resources Association (ELRA). <a href="https://www.sign-lang.uni-hamburg.de/lrec/pub/06001.pdf">https://www.sign-lang.uni-hamburg.de/lrec/pub/06001.pdf</a>.</p>
 </div>
 <div id="ref-post-2018-call-sacrebleu">
-<p>Post, Matt. 2018. “A Call for Clarity in Reporting BLEU Scores.” In <em>Proceedings of the Third Conference on Machine Translation: Research Papers</em>, edited by Ondřej Bojar, Rajen Chatterjee, Christian Federmann, Mark Fishel, Yvette Graham, Barry Haddow, Matthias Huck, et al., 186–91. Brussels, Belgium: Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/W18-6319">https://doi.org/10.18653/v1/W18-6319</a>.</p>
+<p>Post, Matt. 2018. “A Call for Clarity in Reporting BLEU Scores.” In <em>Proceedings of the Third Conference on Machine Translation: Research Papers</em>, 186–91. Brussels, Belgium: Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/W18-6319">https://doi.org/10.18653/v1/W18-6319</a>.</p>
 </div>
 <div id="ref-pratap2020mls">
 <p>Pratap, Vineel, Qiantong Xu, Anuroop Sriram, Gabriel Synnaeve, and Ronan Collobert. 2020. “MLS: A Large-Scale Multilingual Dataset for Speech Research.” In <em>Interspeech 2020, 21st Annual Conference of the International Speech Communication Association, Virtual Event, Shanghai, China, 25-29 October 2020</em>, edited by Helen Meng, Bo Xu, and Thomas Fang Zheng, 2757–61. ISCA. <a href="https://doi.org/10.21437/Interspeech.2020-2826">https://doi.org/10.21437/Interspeech.2020-2826</a>.</p>
@@ -1514,6 +1526,9 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 </div>
 <div id="ref-writing:prillwitz1990hamburg">
 <p>Prillwitz, Siegmund, and Heiko Zienert. 1990. “Hamburg Notation System for Sign Language: Development of a Sign Writing with Computer Application.” In <em>Current Trends in European Sign Language Research. Proceedings of the 3rd European Congress on Sign Language Research</em>, 355–79.</p>
+</div>
+<div id="ref-raffel2020T5Transformer">
+<p>Raffel, Colin, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J. Liu. 2020. “Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer.” <em>J. Mach. Learn. Res.</em> 21: 140:1–140:67. <a href="http://jmlr.org/papers/v21/20-074.html">http://jmlr.org/papers/v21/20-074.html</a>.</p>
 </div>
 <div id="ref-ramirez2004efficient">
 <p>Ramırez, Javier, José C Segura, Carmen Benıtez, Angel De La Torre, and Antonio Rubio. 2004. “Efficient Voice Activity Detection Algorithms Using Long-Term Speech Information.” <em>Speech Communication</em> 42 (3-4): 271–87.</p>
@@ -1532,6 +1547,12 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 </div>
 <div id="ref-roy2011discourse">
 <p>Roy, Cynthia B. 2011. <em>Discourse in Signed Languages</em>. Gallaudet University Press.</p>
+</div>
+<div id="ref-rust2024PrivacyAwareSign">
+<p>Rust, Phillip, Bowen Shi, Skyler Wang, Necati Cihan Camgöz, and Jean Maillard. 2024. “Towards Privacy-Aware Sign Language Translation at Scale.” <a href="http://arxiv.org/abs/2402.09611">http://arxiv.org/abs/2402.09611</a>.</p>
+</div>
+<div id="ref-ryali2023HieraVisionTransformer">
+<p>Ryali, Chaitanya, Yuan-Ting Hu, Daniel Bolya, Chen Wei, Haoqi Fan, Po-Yao Huang, Vaibhav Aggarwal, et al. 2023. “Hiera: A Hierarchical Vision Transformer Without the Bells-and-Whistles.” In <em>Proceedings of the 40th International Conference on Machine Learning</em>, edited by Andreas Krause, Emma Brunskill, Kyunghyun Cho, Barbara Engelhardt, Sivan Sabato, and Jonathan Scarlett, 202:29441–54. Proceedings of Machine Learning Research. PMLR. <a href="https://proceedings.mlr.press/v202/ryali23a.html">https://proceedings.mlr.press/v202/ryali23a.html</a>.</p>
 </div>
 <div id="ref-dataset:samsSignBDWordVideoBasedBangla2023">
 <p>Sams, Ataher, Ahsan Habib Akash, and S. M. Mahbubur Rahman. 2023. “SignBD-Word: Video-Based Bangla Word-Level Sign Language and Pose Translation.” In <em>2023 14th International Conference on Computing Communication and Networking Technologies (ICCCNT)</em>, 1–7. <a href="https://doi.org/10.1109/ICCCNT56998.2023.10306914">https://doi.org/10.1109/ICCCNT56998.2023.10306914</a>.</p>
@@ -1634,6 +1655,9 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 </div>
 <div id="ref-un2022">
 <p>United Nations. 2022. “International Day of Sign Languages.” <a href="https://www.un.org/en/observances/sign-languages-day">https://www.un.org/en/observances/sign-languages-day</a>.</p>
+</div>
+<div id="ref-dataset:uthus2023YoutubeASL">
+<p>Uthus, Dave, Garrett Tanzer, and Manfred Georg. 2023. “YouTube-Asl: A Large-Scale, Open-Domain American Sign Language-English Parallel Corpus.” In <em>Advances in Neural Information Processing Systems</em>, edited by A. Oh, T. Naumann, A. Globerson, K. Saenko, M. Hardt, and S. Levine, 36:29029–47. Curran Associates, Inc. <a href="https://proceedings.neurips.cc/paper_files/paper/2023/file/5c61452daca5f0c260e683b317d13a3f-Paper-Datasets_and_Benchmarks.pdf">https://proceedings.neurips.cc/paper_files/paper/2023/file/5c61452daca5f0c260e683b317d13a3f-Paper-Datasets_and_Benchmarks.pdf</a>.</p>
 </div>
 <div id="ref-dataset:herreweghe2015VGTCorpus">
 <p>Van Herreweghe, Mieke and Vermeerbergen, Myriam and Demey, Eline and De Durpel, Hannes and Nyffels, Hilde and Verstraete, Sam. n.d. “Het Corpus VGT. Een digitaal open access corpus van videos and annotaties van Vlaamse Gebarentaal, ontwikkeld aan de Universiteit Gent ism KU Leuven. &lt;www.corpusvgt.be&gt;.” <a href="%7Bhttp://www.corpusvgt.ugent.be/%7D">{http://www.corpusvgt.ugent.be/}</a>.</p>
