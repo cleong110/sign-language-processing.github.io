@@ -498,7 +498,7 @@ the need for expensive film studios and complex video technology typically assoc
 
 Most recently in the field of image and video generation, 
 there have been notable advances in methods such as 
-Style-Based Generator Architecture for Generative Adversarial Networks [@style-to-image:Karras2018ASG,@style-to-image:Karras2019stylegan2,@style-to-image:Karras2021], 
+Style-Based Generator Architecture for Generative Adversarial Networks [@style-to-image:Karras2018ASG;@style-to-image:Karras2019stylegan2;@style-to-image:Karras2021], 
 Variational Diffusion Models [@text-to-image:Kingma2021VariationalDM], 
 High-Resolution Image Synthesis with Latent Diffusion Models [@text-to-image:Rombach2021HighResolutionIS], 
 High Definition Video Generation with Diffusion Models [@text-to-video:Ho2022ImagenVH], and 
@@ -775,7 +775,7 @@ The framework achieves state-of-the-art results on the RWTH-PHOENIX-Weather-2014
 <!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: YoutubeASL explanation would fit nicely here before Rust et al 2024. They don't just do data IIRC. -->
 
 @rust2024PrivacyAwareSign introduce a two-stage privacy-aware method for sign language translation (SLT) at scale, termed Self-Supervised Video Pretraining for Sign Language Translation (SSVP-SLT). 
-The first stage involves self-supervised pretraining of a Hiera vision transformer [@ryali2023HieraVisionTransformer] on large unannotated video datasets [@dataset:duarte2020how2sign, @dataset:uthus2023YoutubeASL]. 
+The first stage involves self-supervised pretraining of a Hiera vision transformer [@ryali2023HieraVisionTransformer] on large unannotated video datasets [@dataset:duarte2020how2sign;@dataset:uthus2023YoutubeASL]. 
 In the second stage, the vision model's outputs are fed into a multilingual language model [@raffel2020T5Transformer] for finetuning on the How2Sign dataset [@dataset:duarte2020how2sign].
 To mitigate privacy risks, the framework employs facial blurring during pretraining.
 They find that while pretraining with blurring hurts performance, some can be recovered when finetuning with unblurred data.
@@ -1027,7 +1027,7 @@ for signed language [@dataset:mesch2012meaning;@fenlon2015building;@crasborn2016
 One notable dictionary, SpreadTheSign\footnote{\url{https://www.spreadthesign.com/}} is a parallel dictionary containing around 25,000 words with up to 42 different spoken-signed language pairs and more than 600,000 videos in total. Unfortunately, while dictionaries may help create lexical rules between languages, they do not demonstrate the grammar or the usage of signs in context.
 
 ###### Fingerspelling corpora {-}
-usually consist of videos of words borrowed from spoken languages that are signed letter-by-letter. They can be synthetically created [@dataset:dreuw2006modeling] or mined from online resources [@dataset:fs18slt,@dataset:fs18iccv]. However, they only capture one aspect of signed languages.
+usually consist of videos of words borrowed from spoken languages that are signed letter-by-letter. They can be synthetically created [@dataset:dreuw2006modeling] or mined from online resources [@dataset:fs18slt;@dataset:fs18iccv]. However, they only capture one aspect of signed languages.
 
 ###### Isolated sign corpora {-}
 are collections of annotated single signs. They are synthesized [@dataset:ebling2018smile;@dataset:huang2018video;@dataset:sincan2020autsl;@dataset:hassan-etal-2020-isolated] or mined from online resources [@dataset:joze2018ms;@dataset:li2020word], and can be used for isolated sign language recognition or contrastive analysis of minimal signing pairs [@dataset:imashev2020dataset]. However, like dictionaries, they do not describe relations between signs, nor do they capture coarticulation during the signing, and are often limited in vocabulary size (20-1000 signs).
@@ -1192,7 +1192,7 @@ Emailed Eleni and Evita; I need to make sure data is available.
 | [ChicagoFSWild+](https://ttic.uchicago.edu/~klivescu/ChicagoFSWild.htm) [💾](https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/chicago_fs_wild) | @dataset:fs18iccv | American | <span title="video">🎥</span><span title="text:Fingerspelling">📜</span> | 26 | 55,232 Sequences | 260 | Public |
 | [Content4All](https://www.cvssp.org/data/c4a-news-corpus/) | @dataset:camgoz2021content4all | Swiss-German, Flemish | <span title="video">🎥</span><span title="pose:OpenPose">👋</span><span title="text:Swiss-German">📜</span><span title="text:Flemish">📜</span> |  | 190 Hours |  | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) |
 | [CopyCat](http://wearables.cc.gatech.edu/projects/copycat/) | @dataset:zafrulla2010novel | American | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> | 22 | 420 Phrases | 5 |  |
-| [Corpus NGT](https://www.ru.nl/corpusngtuk/) [💾](https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/ngt_corpus) | @dataset:Crasborn2008TheCN | Netherlands | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> |  | 15 Hours | 92 | [CC BY-NC-SA 3.0 NL](https://creativecommons.org/licenses/by-nc-sa/3.0/nl/deed.en_GB) |
+| [Corpus NGT](https://corpusngt.nl/) [💾](https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/ngt_corpus) | @dataset:Crasborn2008TheCN | Netherlands | <span title="video:SignerA">🎥</span><span title="video:SignerB">🎥</span><span title="gloss">📋</span><span title="text:Dutch">📜</span> | ~3k | ~2375 sessions | ~90 | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) |
 | [DEVISIGN](http://vipl.ict.ac.cn/homepage/ksl/data.html) | @dataset:chai2014devisign | Chinese | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> | 2,000 | 24,000 Samples | 8 | [Research purpose on request](http://vipl.ict.ac.cn/homepage/ksl/document/Agreement.pdf) |
 | [Dicta-Sign](https://www.sign-lang.uni-hamburg.de/dicta-sign/portal/) [💾](https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/dicta_sign) | @dataset:matthes2012dicta | Multilingual | <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span> |  | 6-8 Hours (/Participant) | 16-18 /Language |  |
 | [How2Sign](https://how2sign.github.io/) [💾](https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/how2sign) | @dataset:duarte2020how2sign | American | <span title="video">🎥</span><span title="pose:OpenPose">👋</span><span title="gloss:ASL">📋</span><span title="text:English">📜</span><span title="speech:English">🔊</span> | 16,000 | 79 hours (35,000 sentences) | 11 | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) |
