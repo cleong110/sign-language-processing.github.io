@@ -340,7 +340,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <p>Gloss-to-Pose, subsumed under the task of sign language production, is the task of producing a sequence of poses that adequately represent a sequence of signs written as gloss.</p>
 <p>To produce a sign language video, <span class="citation" data-cites="stoll2018sign">Stoll et al. (<a href="#ref-stoll2018sign" role="doc-biblioref">2018</a>)</span> constructed a lookup table between glosses and sequences of 2D poses. They aligned all pose sequences at the neck joint of a reference skeleton and grouped all sequences belonging to the same gloss. Then, for each group, they applied dynamic time warping and averaged out all sequences in the group to construct the mean pose sequence. This approach suffers from not having an accurate set of poses aligned to the gloss and from unnatural motion transitions between glosses.</p>
 <p>To alleviate the downsides of the previous work, <span class="citation" data-cites="stoll2020text2sign">Stoll et al. (<a href="#ref-stoll2020text2sign" role="doc-biblioref">2020</a>)</span> constructed a lookup table of gloss to a group of sequences of poses rather than creating a mean pose sequence. They built a Motion Graph <span class="citation" data-cites="min2012motion">(Min and Chai <a href="#ref-min2012motion" role="doc-biblioref">2012</a>)</span>, which is a Markov process used to generate new motion sequences that are representative of natural motion, and selected the motion primitives (sequence of poses) per gloss with the highest transition probability. To smooth that sequence and reduce unnatural motion, they used a Savitzky–Golay motion transition smoothing filter <span class="citation" data-cites="savitzky1964smoothing">(Savitzky and Golay <a href="#ref-savitzky1964smoothing" role="doc-biblioref">1964</a>)</span>. <span class="citation" data-cites="moryossef2023baseline">Moryossef, Müller, et al. (<a href="#ref-moryossef2023baseline" role="doc-biblioref">2023</a>)</span> re-implemented their approach and made it open-source.</p>
-<p><span class="citation" data-cites="huang2021towards">Huang et al. (<a href="#ref-huang2021towards" role="doc-biblioref">2021</a>)</span> used a new non-autoregressive model to generate a sequence of poses for a sequence of glosses. They argued that existing models like <span class="citation" data-cites="saunders2020adversarial">Saunders, Bowden, and Camgöz (<a href="#ref-saunders2020adversarial" role="doc-biblioref">2020</a>)</span> are prone to error accumulation and high inference latency due to their autoregressive nature. Their model performs gradual upsampling of the poses, by starting with a pose including only two joints in the first layer, and gradually introducing more keypoints. They evaluated their model on the Phoenix-14T dataset <span class="citation" data-cites="dataset:forster2014extensions">(Forster et al. <a href="#ref-dataset:forster2014extensions" role="doc-biblioref">2014</a>)</span> using Dynamic Time Warping (DTW) <span class="citation" data-cites="Berndt1994UsingDT">(Berndt and Clifford <a href="#ref-Berndt1994UsingDT" role="doc-biblioref">1994</a>)</span> to align the poses before computing Mean Joint Error (DTW-MJE). They demonstrated that their model outperforms existing methods in terms of accuracy and speed, making it a promising approach for fast and high-quality sign language production.</p>
+<p><span class="citation" data-cites="huang2021towards">Huang et al. (<a href="#ref-huang2021towards" role="doc-biblioref">2021</a>)</span> used a new non-autoregressive model to generate a sequence of poses for a sequence of glosses. They argued that existing models like <span class="citation" data-cites="saunders2020adversarial">Saunders, Bowden, and Camgöz (<a href="#ref-saunders2020adversarial" role="doc-biblioref">2020</a>)</span> are prone to error accumulation and high inference latency due to their autoregressive nature. Their model performs gradual upsampling of the poses, by starting with a pose including only two joints in the first layer, and gradually introducing more keypoints. They evaluated their model on the RWTH-PHOENIX-WEATHER 2014T dataset <span class="citation" data-cites="cihan2018neural">(Camgöz et al. <a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span> using Dynamic Time Warping (DTW) <span class="citation" data-cites="Berndt1994UsingDT">(Berndt and Clifford <a href="#ref-Berndt1994UsingDT" role="doc-biblioref">1994</a>)</span> to align the poses before computing Mean Joint Error (DTW-MJE). They demonstrated that their model outperforms existing methods in terms of accuracy and speed, making it a promising approach for fast and high-quality sign language production.</p>
 <hr />
 <h4 id="video-to-gloss">Video-to-Gloss</h4>
 <p>Video-to-Gloss, also known as sign language recognition, is the task of recognizing a sequence of signs from a video.</p>
@@ -369,7 +369,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <p>Following up, <span class="citation" data-cites="camgoz2020multi">N. C. Camgöz et al. (<a href="#ref-camgoz2020multi" role="doc-biblioref">2020</a><a href="#ref-camgoz2020multi" role="doc-biblioref">a</a>)</span> propose a new architecture that does not require the supervision of glosses, named “Multi-channel Transformers for Multi-articulatory Sign Language Translation”. In this approach, they crop the signing hand and the face and perform 3D pose estimation to obtain three separate data channels. They encode each data channel separately using a transformer, then encode all channels together and concatenate the separate channels for each frame. Like their previous work, they use a transformer decoder to decode the spoken language text, but unlike their previous work, do not use the gloss as additional supervision. Instead, they add two “anchoring” losses to predict the hand shape and mouth shape from each frame independently, as silver annotations are available to them using the model proposed in <span class="citation" data-cites="koller2019weakly">Koller et al. (<a href="#ref-koller2019weakly" role="doc-biblioref">2019</a>)</span>. They conclude that this approach is on-par with previous approaches requiring glosses, and so they have broken the dependency upon costly annotated gloss information in the video-to-text task.</p>
 <p><span class="citation" data-cites="shi-etal-2022-open">Shi et al. (<a href="#ref-shi-etal-2022-open" role="doc-biblioref">2022</a>)</span> introduce OpenASL, a large-scale American Sign Language (ASL) - English dataset collected from online video sites (e.g., YouTube), and then propose a set of techniques including sign search as a pretext task for pre-training and fusion of mouthing and handshape features to improve translation quality in the absence of glosses and in the presence of visually challenging data.</p>
 <!-- Really should put MMTLB here, a number of papers cite it including chen2022, which actually builds on it directly, cites it as a source for "mBART is good for SLT", etc. -->
-<p><span class="citation" data-cites="chen2022TwoStreamNetworkSign">Yutong Chen, Zuo, et al. (<a href="#ref-chen2022TwoStreamNetworkSign" role="doc-biblioref">2022</a>)</span> present a two-stream network for sign language recognition (SLR) and translation (SLT), utilizing a dual visual encoder architecture to encode RGB video frames and pose keypoints in separate streams. These streams interact via bidirectional lateral connections. For SLT, the visual encoders based on an S3D backbone <span class="citation" data-cites="xie2018SpatiotemporalS3D">(Xie et al. <a href="#ref-xie2018SpatiotemporalS3D" role="doc-biblioref">2018</a>)</span> output to a multilingual translation network using mBART <span class="citation" data-cites="liu-etal-2020-multilingual-denoising">(Liu et al. <a href="#ref-liu-etal-2020-multilingual-denoising" role="doc-biblioref">2020</a>)</span>. The model achieves state-of-the-art performance on the RWTH-PHOENIX-Weather-2014 <span class="citation" data-cites="dataset:forster2014extensions">(Forster et al. <a href="#ref-dataset:forster2014extensions" role="doc-biblioref">2014</a>)</span>, RWTH-PHOENIX-Weather-2014T <span class="citation" data-cites="cihan2018neural">(Camgöz et al. <a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span> and CSL-Daily <span class="citation" data-cites="dataset:Zhou2021_SignBackTranslation_CSLDaily">(Zhou et al. <a href="#ref-dataset:Zhou2021_SignBackTranslation_CSLDaily" role="doc-biblioref">2021</a>)</span> datasets.</p>
+<p><span class="citation" data-cites="chen2022TwoStreamNetworkSign">Yutong Chen, Zuo, et al. (<a href="#ref-chen2022TwoStreamNetworkSign" role="doc-biblioref">2022</a>)</span> present a two-stream network for sign language recognition (SLR) and translation (SLT), utilizing a dual visual encoder architecture to encode RGB video frames and pose keypoints in separate streams. These streams interact via bidirectional lateral connections. For SLT, the visual encoders based on an S3D backbone <span class="citation" data-cites="xie2018SpatiotemporalS3D">(Xie et al. <a href="#ref-xie2018SpatiotemporalS3D" role="doc-biblioref">2018</a>)</span> output to a multilingual translation network using mBART <span class="citation" data-cites="liu-etal-2020-multilingual-denoising">(Liu et al. <a href="#ref-liu-etal-2020-multilingual-denoising" role="doc-biblioref">2020</a>)</span>. The model achieves state-of-the-art performance on the RWTH-PHOENIX-Weather-2014 <span class="citation" data-cites="koller2015ContinuousSLR">(Koller, Forster, and Ney <a href="#ref-koller2015ContinuousSLR" role="doc-biblioref">2015</a>)</span>, RWTH-PHOENIX-Weather-2014T <span class="citation" data-cites="cihan2018neural">(Camgöz et al. <a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span> and CSL-Daily <span class="citation" data-cites="dataset:Zhou2021_SignBackTranslation_CSLDaily">(Zhou et al. <a href="#ref-dataset:Zhou2021_SignBackTranslation_CSLDaily" role="doc-biblioref">2021</a>)</span> datasets.</p>
 <p><span class="citation" data-cites="zhang2023sltunet">B. Zhang, Müller, and Sennrich (<a href="#ref-zhang2023sltunet" role="doc-biblioref">2023</a>)</span> propose a multi-modal, multi-task learning approach to end-to-end sign language translation. The model features shared representations for different modalities such as text and video and is trained jointly on several tasks such as video-to-gloss, gloss-to-text, and video-to-text. The approach allows leveraging external data such as parallel data for spoken language machine translation.</p>
 <p><span class="citation" data-cites="Zhao_Zhang_Fu_Hu_Su_Chen_2024">Zhao et al. (<a href="#ref-Zhao_Zhang_Fu_Hu_Su_Chen_2024" role="doc-biblioref">2024</a>)</span> introduce CV-SLT, employing conditional variational autoencoders to address the modality gap between video and text. Their approach involves guiding the model to encode visual and textual data similarly through two paths: one with visual data alone and one with both modalities. Using KL divergences, they steer the model towards generating consistent embeddings and accurate outputs regardless of the path. Once the model achieves consistent performance across paths, it can be utilized for translation without gloss supervision. Evaluation on the RWTH-PHOENIX-Weather-2014T <span class="citation" data-cites="cihan2018neural">(Camgöz et al. <a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span> and CSL-Daily <span class="citation" data-cites="dataset:Zhou2021_SignBackTranslation_CSLDaily">(Zhou et al. <a href="#ref-dataset:Zhou2021_SignBackTranslation_CSLDaily" role="doc-biblioref">2021</a>)</span> datasets demonstrates its efficacy. They provide a <a href="https://github.com/rzhao-zhsq/CV-SLT">code implementation</a> based largely on <span class="citation" data-cites="chenSimpleMultiModalityTransfer2022a">Yutong Chen, Wei, et al. (<a href="#ref-chenSimpleMultiModalityTransfer2022a" role="doc-biblioref">2022</a>)</span>. <!-- The CV-SLT code looks pretty nice! Conda env file, data prep, not too old, paths in .yaml files, checkpoints provided (including the ones for replication), commands to train and evaluate, very nice --></p>
 <!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: the "previous gloss-free frameworks" that gongLLMsAreGood2024 cite are: Gloss Attention for Gloss-free Sign Language Translation (2023) and Gloss-free sign language translation: Improving from visual-language pretraining, 2023 aka GFSLT-VLP. Could be good to lead into it with explanations of those? -->
@@ -385,7 +385,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <p><span class="citation" data-cites="dataset:ko2019neural">Ko et al. (<a href="#ref-dataset:ko2019neural" role="doc-biblioref">2019</a>)</span> demonstrated impressive performance on the pose-to-text task by inputting the pose sequence into a standard encoder-decoder translation network. They experimented both with GRU and various types of attention <span class="citation" data-cites="luong2015effective bahdanau2014neural">(Luong, Pham, and Manning <a href="#ref-luong2015effective" role="doc-biblioref">2015</a>; Bahdanau, Cho, and Bengio <a href="#ref-bahdanau2014neural" role="doc-biblioref">2015</a>)</span> and with a Transformer <span class="citation" data-cites="vaswani2017attention">(Vaswani et al. <a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a>)</span>, and showed similar performance, with the transformer underperforming on the validation set and overperforming on the test set, which consists of unseen signers. They experimented with various normalization schemes, mainly subtracting the mean and dividing by the standard deviation of every individual keypoint either concerning the entire frame or the relevant “object” (Body, Face, and Hand).</p>
 <h4 id="text-to-pose">Text-to-Pose</h4>
 <p>Text-to-Pose, also known as sign language production, is the task of producing a sequence of poses that adequately represent a spoken language text in sign language, as an intermediate representation to overcome challenges in animation. Most efforts use poses as an intermediate representation to overcome the challenges in generating videos directly, with the goal of using computer animation or pose-to-video models to perform video production.</p>
-<p><span class="citation" data-cites="saunders2020progressive">Saunders, Camgöz, and Bowden (<a href="#ref-saunders2020progressive" role="doc-biblioref">2020</a><a href="#ref-saunders2020progressive" role="doc-biblioref">b</a>)</span> proposed Progressive Transformers, a model to translate from discrete spoken language sentences to continuous 3D sign pose sequences in an autoregressive manner. Unlike symbolic transformers <span class="citation" data-cites="vaswani2017attention">(Vaswani et al. <a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a>)</span>, which use a discrete vocabulary and thus can predict an end-of-sequence (<code>EOS</code>) token in every step, the progressive transformer predicts a <span class="math inline"><em>c</em><em>o</em><em>u</em><em>n</em><em>t</em><em>e</em><em>r</em> ∈ [0, 1]</span> in addition to the pose. In inference time, <span class="math inline"><em>c</em><em>o</em><em>u</em><em>n</em><em>t</em><em>e</em><em>r</em> = 1</span> is considered the end of the sequence. They tested their approach on the RWTH-PHOENIX-Weather-2014T dataset using OpenPose 2D pose estimation, uplifted to 3D <span class="citation" data-cites="pose:zelinka2020neural">(Zelinka and Kanis <a href="#ref-pose:zelinka2020neural" role="doc-biblioref">2020</a>)</span>, and showed favorable results when evaluating using back-translation from the generated poses to spoken language. They further showed <span class="citation" data-cites="saunders2020adversarial">(Saunders, Bowden, and Camgöz <a href="#ref-saunders2020adversarial" role="doc-biblioref">2020</a>)</span> that using an adversarial discriminator between the ground truth poses and the generated poses, conditioned on the input spoken language text, improves the production quality as measured using back-translation.</p>
+<p><span class="citation" data-cites="saunders2020progressive">Saunders, Camgöz, and Bowden (<a href="#ref-saunders2020progressive" role="doc-biblioref">2020</a><a href="#ref-saunders2020progressive" role="doc-biblioref">b</a>)</span> proposed Progressive Transformers, a model to translate from discrete spoken language sentences to continuous 3D sign pose sequences in an autoregressive manner. Unlike symbolic transformers <span class="citation" data-cites="vaswani2017attention">(Vaswani et al. <a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a>)</span>, which use a discrete vocabulary and thus can predict an end-of-sequence (<code>EOS</code>) token in every step, the progressive transformer predicts a <span class="math inline"><em>c</em><em>o</em><em>u</em><em>n</em><em>t</em><em>e</em><em>r</em> ∈ [0, 1]</span> in addition to the pose. In inference time, <span class="math inline"><em>c</em><em>o</em><em>u</em><em>n</em><em>t</em><em>e</em><em>r</em> = 1</span> is considered the end of the sequence. They tested their approach on the RWTH-PHOENIX-Weather-2014T dataset <span class="citation" data-cites="cihan2018neural">(Camgöz et al. <a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span> using OpenPose 2D pose estimation, uplifted to 3D <span class="citation" data-cites="pose:zelinka2020neural">(Zelinka and Kanis <a href="#ref-pose:zelinka2020neural" role="doc-biblioref">2020</a>)</span>, and showed favorable results when evaluating using back-translation from the generated poses to spoken language. They further showed <span class="citation" data-cites="saunders2020adversarial">(Saunders, Bowden, and Camgöz <a href="#ref-saunders2020adversarial" role="doc-biblioref">2020</a>)</span> that using an adversarial discriminator between the ground truth poses and the generated poses, conditioned on the input spoken language text, improves the production quality as measured using back-translation.</p>
 <p>To overcome the issues of under-articulation seen in the above works, <span class="citation" data-cites="saunders2020everybody">Saunders, Camgöz, and Bowden (<a href="#ref-saunders2020everybody" role="doc-biblioref">2020</a><a href="#ref-saunders2020everybody" role="doc-biblioref">a</a>)</span> expanded on the progressive transformer model using a Mixture Density Network (MDN) <span class="citation" data-cites="bishop1994mixture">(Bishop <a href="#ref-bishop1994mixture" role="doc-biblioref">1994</a>)</span> to model the variation found in sign language. While this model underperformed on the validation set, compared to previous work, it outperformed on the test set.</p>
 <p><span class="citation" data-cites="pose:zelinka2020neural">Zelinka and Kanis (<a href="#ref-pose:zelinka2020neural" role="doc-biblioref">2020</a>)</span> presented a similar autoregressive decoder approach, with added dynamic-time-warping (DTW) and soft attention. They tested their approach on Czech Sign Language weather data extracted from the news, which is not manually annotated, or aligned to the spoken language captions, and showed their DTW is advantageous for this kind of task.</p>
 <p><span class="citation" data-cites="xiao2020skeleton">Xiao, Qin, and Yin (<a href="#ref-xiao2020skeleton" role="doc-biblioref">2020</a>)</span> closed the loop by proposing a text-to-pose-to-text model for the case of isolated sign language recognition. They first trained a classifier to take a sequence of poses encoded by a BiLSTM and classify the relevant sign, then proposed a production system to take a single sign and sample a constant length sequence of 50 poses from a Gaussian Mixture Model. These components are combined such that given a sign class <span class="math inline"><em>y</em></span>, a pose sequence is generated, then classified back into a sign class <span class="math inline"><em>ŷ</em></span>, and the loss is applied between <span class="math inline"><em>y</em></span> and <span class="math inline"><em>ŷ</em></span>, and not directly on the generated pose sequence. They evaluate their approach on the CSL dataset <span class="citation" data-cites="dataset:huang2018video">(Huang et al. <a href="#ref-dataset:huang2018video" role="doc-biblioref">2018</a>)</span> and show that their generated pose sequences almost reach the same classification performance as the reference sequences.</p>
@@ -428,7 +428,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <h3 id="pretraining-and-representation-learning">Pretraining and Representation-learning</h3>
 <!-- SignBERT, SignBERT+, BEST. Possibly also Sign-VQ or CV-SLT can be discussed here -->
 <p>In this paradigm, rather than targeting a specific task (e.g. pose-to-text), the aim is to learn a generally-useful Sign Language Understanding model or representation which can be applied or finetuned to specific downstream tasks.</p>
-<p><span class="citation" data-cites="hu2023SignBertPlus">Hu et al. (<a href="#ref-hu2023SignBertPlus" role="doc-biblioref">2023</a>)</span> introduce SignBERT+, a self-supervised pretraining method for sign language understanding (SLU) based on masked modeling of pose sequences. This is an extension of their earlier SignBERT <span class="citation" data-cites="hu2021SignBert">(H. Hu, Zhao, et al. <a href="#ref-hu2021SignBert" role="doc-biblioref">2021</a>)</span>, with several improvements. For pretraining they extract pose sequences from over 230k videos using MMPose <span class="citation" data-cites="mmpose2020">(Contributors <a href="#ref-mmpose2020" role="doc-biblioref">2020</a>)</span>. They then perform multi-level masked modeling (joints, frames, clips) on these sequences, integrating a statistical hand model <span class="citation" data-cites="romero2017MANOHandModel">(Romero, Tzionas, and Black <a href="#ref-romero2017MANOHandModel" role="doc-biblioref">2017</a>)</span> to constrain the decoder’s predictions for anatomical realism and enhanced accuracy. Validation on isolated SLR (MS-ASL <span class="citation" data-cites="dataset:joze2018ms">(Joze and Koller <a href="#ref-dataset:joze2018ms" role="doc-biblioref">2019</a>)</span>, WLASL <span class="citation" data-cites="dataset:li2020word">(Li et al. <a href="#ref-dataset:li2020word" role="doc-biblioref">2020</a>)</span>, SLR500 <span class="citation" data-cites="huang2019attention3DCNNsSLR">(Huang et al. <a href="#ref-huang2019attention3DCNNsSLR" role="doc-biblioref">2019</a>)</span>), continuous SLR (RWTH-PHOENIX-Weather <span class="citation" data-cites="koller2015ContinuousSLR">(Koller, Forster, and Ney <a href="#ref-koller2015ContinuousSLR" role="doc-biblioref">2015</a>)</span>), and SLT (RWTH-PHOENIX-Weather 2014T <span class="citation" data-cites="dataset:forster2014extensions cihan2018neural">(Forster et al. <a href="#ref-dataset:forster2014extensions" role="doc-biblioref">2014</a>; Camgöz et al. <a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span>) demonstrates state-of-the-art performance.</p>
+<p><span class="citation" data-cites="hu2023SignBertPlus">Hu et al. (<a href="#ref-hu2023SignBertPlus" role="doc-biblioref">2023</a>)</span> introduce SignBERT+, a self-supervised pretraining method for sign language understanding (SLU) based on masked modeling of pose sequences. This is an extension of their earlier SignBERT <span class="citation" data-cites="hu2021SignBert">(H. Hu, Zhao, et al. <a href="#ref-hu2021SignBert" role="doc-biblioref">2021</a>)</span>, with several improvements. For pretraining they extract pose sequences from over 230k videos using MMPose <span class="citation" data-cites="mmpose2020">(Contributors <a href="#ref-mmpose2020" role="doc-biblioref">2020</a>)</span>. They then perform multi-level masked modeling (joints, frames, clips) on these sequences, integrating a statistical hand model <span class="citation" data-cites="romero2017MANOHandModel">(Romero, Tzionas, and Black <a href="#ref-romero2017MANOHandModel" role="doc-biblioref">2017</a>)</span> to constrain the decoder’s predictions for anatomical realism and enhanced accuracy. Validation on isolated SLR (MS-ASL <span class="citation" data-cites="dataset:joze2018ms">(Joze and Koller <a href="#ref-dataset:joze2018ms" role="doc-biblioref">2019</a>)</span>, WLASL <span class="citation" data-cites="dataset:li2020word">(Li et al. <a href="#ref-dataset:li2020word" role="doc-biblioref">2020</a>)</span>, SLR500 <span class="citation" data-cites="huang2019attention3DCNNsSLR">(Huang et al. <a href="#ref-huang2019attention3DCNNsSLR" role="doc-biblioref">2019</a>)</span>), continuous SLR (RWTH-PHOENIX-Weather 2014 <span class="citation" data-cites="koller2015ContinuousSLR">(Koller, Forster, and Ney <a href="#ref-koller2015ContinuousSLR" role="doc-biblioref">2015</a>)</span>), and SLT (RWTH-PHOENIX-Weather 2014T <span class="citation" data-cites="cihan2018neural">(Camgöz et al. <a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span>) demonstrates state-of-the-art performance.</p>
 <!-- BEST seems to be **B**ERT pre-training for **S**ign language recognition with coupling **T**okenization -->
 <p><span class="citation" data-cites="Zhao2023BESTPretrainingSignLanguageRecognition">Zhao et al. (<a href="#ref-Zhao2023BESTPretrainingSignLanguageRecognition" role="doc-biblioref">2023</a>)</span> introduce BEST (BERT Pre-training for Sign Language Recognition with Coupling Tokenization), a pre-training method based on masked modeling of pose sequences using a coupled tokenization scheme. This method takes pose triplet units (left hand, right hand, and upper-body with arms) as inputs, each tokenized into discrete codes <span class="citation" data-cites="van_den_Oord_2017NeuralDiscreteRepresentationLearning">(Oord, Vinyals, and Kavukcuoglu <a href="#ref-van_den_Oord_2017NeuralDiscreteRepresentationLearning" role="doc-biblioref">2017</a>)</span> that are then coupled together. Masked modeling is then applied, where any or all components of the triplet (left hand, right hand, or upper-body) may be masked, to learn hierarchical correlations among them. Unlike <span class="citation" data-cites="hu2023SignBertPlus">Hu et al. (<a href="#ref-hu2023SignBertPlus" role="doc-biblioref">2023</a>)</span>, BEST does not mask multi-frame pose sequences or individual joints. The authors validate their pre-training method on isolated sign recognition (ISR) tasks using MS-ASL <span class="citation" data-cites="dataset:joze2018ms">(Joze and Koller <a href="#ref-dataset:joze2018ms" role="doc-biblioref">2019</a>)</span>, WLASL <span class="citation" data-cites="dataset:li2020word">(Li et al. <a href="#ref-dataset:li2020word" role="doc-biblioref">2020</a>)</span>, SLR500 <span class="citation" data-cites="huang2019attention3DCNNsSLR">(Huang et al. <a href="#ref-huang2019attention3DCNNsSLR" role="doc-biblioref">2019</a>)</span>, and NMFs-CSL <span class="citation" data-cites="hu2021NMFAwareSLR">(H. Hu, Zhou, et al. <a href="#ref-hu2021NMFAwareSLR" role="doc-biblioref">2021</a>)</span>. Besides pose-to-gloss, they also experiment with video-to-gloss tasks via fusion with I3D <span class="citation" data-cites="carreira2017quo">(Carreira and Zisserman <a href="#ref-carreira2017quo" role="doc-biblioref">2017</a>)</span>. Results on these datasets demonstrate state-of-the-art performance compared to previous methods and are comparable to those of SignBERT+ <span class="citation" data-cites="hu2023SignBertPlus">(Hu et al. <a href="#ref-hu2023SignBertPlus" role="doc-biblioref">2023</a>)</span>.</p>
 <h2 id="annotation-tools">Annotation Tools</h2>
@@ -444,6 +444,9 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <h6 id="dataset-papers">Dataset Papers</h6>
 <p>Research papers which do not necessarily contribute new theory or architectures are actually important and useful enablers of other research. Furthermore, the advancement of the dataset creation process itself is important, and the pipeline of creation and curation is a potential target for improvements and advancements.</p>
 <p><span class="citation" data-cites="dataset:joshi-etal-2023-isltranslate">Joshi, Agrawal, and Modi (<a href="#ref-dataset:joshi-etal-2023-isltranslate" role="doc-biblioref">2023</a>)</span> introduce ISLTranslate, a large translation dataset for Indian Sign Language based on publicly available educational videos intended for hard-of-hearing children, which happen to contain both Indian Sign Language and English audio voiceover conveying the same content. They use a speech-to-text model to transcribe the audio content, which they later manually corrected with the help of accompanying books also containing the same content. They also use MediaPipe to extract pose features, and have a certified ISL signer validate a small portion of the sign-text pairs. They provide a baseline based on the architecture proposed in <span class="citation" data-cites="camgoz2020sign">N. C. Camgöz et al. (<a href="#ref-camgoz2020sign" role="doc-biblioref">2020</a><a href="#ref-camgoz2020sign" role="doc-biblioref">b</a>)</span>, and provide code.</p>
+<!-- <span style="background-color: red; color: white; padding: 0 2px !important;">**TODO**</span>: LSA-T aka dataset:dal2022lsa, they use AlphaPose "with the Halpe full-body keypoints format", a visualizer tool, and a baseline SLT model. Especially might be good to mention FiftyOne https://docs.voxel51.com/, "which
+provides useful features such as allowing to filter samples by label, video, playlist,
+or by the confidence score of the signer inference." -->
 <section id="bilingual-dictionaries" class="unnumbered">
 <h6 class="unnumbered">Bilingual dictionaries</h6>
 <p>for signed language <span class="citation" data-cites="dataset:mesch2012meaning fenlon2015building crasborn2016ngt dataset:gutierrez2016lse">(Mesch and Wallin <a href="#ref-dataset:mesch2012meaning" role="doc-biblioref">2012</a>; Fenlon, Cormier, and Schembri <a href="#ref-fenlon2015building" role="doc-biblioref">2015</a>; Crasborn et al. <a href="#ref-crasborn2016ngt" role="doc-biblioref">2016</a>; Gutierrez-Sigut et al. <a href="#ref-dataset:gutierrez2016lse" role="doc-biblioref">2016</a>)</span> map a spoken language word or short phrase to a signed language video. One notable dictionary, SpreadTheSign is a parallel dictionary containing around 25,000 words with up to 42 different spoken-signed language pairs and more than 600,000 videos in total. Unfortunately, while dictionaries may help create lexical rules between languages, they do not demonstrate the grammar or the usage of signs in context.</p>
@@ -807,6 +810,16 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td></td>
 </tr>
 <tr class="even">
+<td><a href="https://midusi.github.io/LSA-T/">LSA-T</a></td>
+<td><span class="citation" data-cites="dataset:dal2022lsa">Dal Bianco et al. (<a href="#ref-dataset:dal2022lsa" role="doc-biblioref">2023</a>)</span></td>
+<td>Argentina</td>
+<td><span title="video:RGB">🎥</span><span title="text:es">📜</span><span title="pose:AlphaPose">👋</span></td>
+<td></td>
+<td>14,880 sentences</td>
+<td>103</td>
+<td><a href="https://github.com/midusi/LSA-T/blob/main/LICENCE">MIT</a></td>
+</tr>
+<tr class="odd">
 <td><a href="https://link.springer.com/content/pdf/10.3758/s13428-014-0560-1.pdf">LSE-SIGN</a></td>
 <td><span class="citation" data-cites="dataset:gutierrez2016lse">Gutierrez-Sigut et al. (<a href="#ref-dataset:gutierrez2016lse" role="doc-biblioref">2016</a>)</span></td>
 <td>Spanish</td>
@@ -816,7 +829,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>2</td>
 <td><a href="http://lse-sign.bcbl.eu/web-busqueda/?page_id=8">Custom</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://www.microsoft.com/en-us/download/details.aspx?id=100121">MS-ASL</a></td>
 <td><span class="citation" data-cites="dataset:joze2018ms">Joze and Koller (<a href="#ref-dataset:joze2018ms" role="doc-biblioref">2019</a>)</span></td>
 <td>American</td>
@@ -826,7 +839,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>222</td>
 <td>Public</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://www.bu.edu/asllrp/ncslgr.html">NCSLGR</a> <a href="https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/ncslgr">💾</a></td>
 <td><span class="citation" data-cites="dataset:databases2007volumes">Databases (<a href="#ref-dataset:databases2007volumes" role="doc-biblioref">2007</a>)</span></td>
 <td>American</td>
@@ -836,7 +849,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>4</td>
 <td><span style="background-color: red; color: white; padding: 0 2px !important;"><strong>TODO</strong></span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://ustc-slr.github.io/datasets/2020_nmfs_csl/">NMFs-CSL</a></td>
 <td><span class="citation" data-cites="hu2021NMFAwareSLR">H. Hu, Zhou, et al. (<a href="#ref-hu2021NMFAwareSLR" role="doc-biblioref">2021</a>)</span></td>
 <td>Chinese</td>
@@ -846,7 +859,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>10</td>
 <td><a href="https://ustc-slr.github.io/datasets/2020_nmfs_csl/Release%20Agreement-NMFs-CSL.pdf">Research purpose on request</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://www.kaggle.com/competitions/asl-signs/data">PopSign ASL v1.0</a></td>
 <td><span class="citation" data-cites="dataset:starner_et_al_2023_PopSignASL_v1">Starner et al. (<a href="#ref-dataset:starner_et_al_2023_PopSignASL_v1" role="doc-biblioref">2023</a>)</span></td>
 <td>American</td>
@@ -856,7 +869,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>47</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://www.sign-lang.uni-hamburg.de/dgs-korpus/index.php/welcome.html">Public DGS Corpus</a> <a href="https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/dgs_corpus">💾</a></td>
 <td><span class="citation" data-cites="dataset:prillwitz2008dgs">Prillwitz et al. (<a href="#ref-dataset:prillwitz2008dgs" role="doc-biblioref">2008</a>)</span></td>
 <td>German</td>
@@ -866,7 +879,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>330</td>
 <td><a href="https://www.sign-lang.uni-hamburg.de/meinedgs/ling/license_en.html">Custom</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://engineering.purdue.edu/RVL/Database/ASL/asl-database-front.htm">RVL-SLLL ASL</a></td>
 <td><span class="citation" data-cites="dataset:martinez2002purdue">Martínez et al. (<a href="#ref-dataset:martinez2002purdue" role="doc-biblioref">2002</a>)</span></td>
 <td>American</td>
@@ -876,7 +889,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>14</td>
 <td><a href="https://engineering.purdue.edu/RVL/Database/ASL/Agreement.pdf">Research Attribution</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://www-i6.informatik.rwth-aachen.de/aslr/fingerspelling.php">RWTH Fingerspelling</a></td>
 <td><span class="citation" data-cites="dataset:dreuw2006modeling">Dreuw et al. (<a href="#ref-dataset:dreuw2006modeling" role="doc-biblioref">2006</a>)</span></td>
 <td>German</td>
@@ -886,7 +899,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>20</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://www-i6.informatik.rwth-aachen.de/aslr/database-rwth-boston-104.php">RWTH-BOSTON-104</a></td>
 <td><span class="citation" data-cites="dataset:dreuw2008benchmark">Dreuw et al. (<a href="#ref-dataset:dreuw2008benchmark" role="doc-biblioref">2008</a>)</span></td>
 <td>American</td>
@@ -896,9 +909,9 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>3</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://www-i6.informatik.rwth-aachen.de/~koller/RWTH-PHOENIX-2014-T/">RWTH-PHOENIX-Weather T</a> <a href="https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/rwth_phoenix2014_t">💾</a></td>
-<td><span class="citation" data-cites="dataset:forster2014extensions">Forster et al. (<a href="#ref-dataset:forster2014extensions" role="doc-biblioref">2014</a>)</span>;<span class="citation" data-cites="cihan2018neural">Camgöz et al. (<a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span></td>
+<td><span class="citation" data-cites="cihan2018neural">Camgöz et al. (<a href="#ref-cihan2018neural" role="doc-biblioref">2018</a>)</span></td>
 <td>German</td>
 <td><span title="video">🎥</span><span title="gloss:DGS">📋</span><span title="text:German">📜</span></td>
 <td>1,231</td>
@@ -906,7 +919,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>9</td>
 <td><a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://research.cs.aalto.fi/cbir/data/s-pot/">S-pot</a></td>
 <td><span class="citation" data-cites="dataset:viitaniemi-etal-2014-pot">Viitaniemi et al. (<a href="#ref-dataset:viitaniemi-etal-2014-pot" role="doc-biblioref">2014</a>)</span></td>
 <td>Finnish</td>
@@ -916,7 +929,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>5</td>
 <td><a href="mailto:leena.savolainen@kuurojenliitto.fi">Permission</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://sign2mint.de/">Sign2MINT</a> <a href="https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/sign2mint">💾</a></td>
 <td>2021</td>
 <td>German</td>
@@ -926,7 +939,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td></td>
 <td><a href="https://creativecommons.org/licenses/by-nc-sa/3.0/de/">CC BY-NC-SA 3.0 DE</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://www.signbank.org/signpuddle/">SignBank</a> <a href="https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/signbank">💾</a></td>
 <td></td>
 <td>Multilingual</td>
@@ -936,7 +949,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://zenodo.org/records/6779843">SignBD-Word</a></td>
 <td><span class="citation" data-cites="dataset:samsSignBDWordVideoBasedBangla2023">Sams, Akash, and Rahman (<a href="#ref-dataset:samsSignBDWordVideoBasedBangla2023" role="doc-biblioref">2023</a>)</span></td>
 <td>Bangla</td>
@@ -946,7 +959,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>16</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="http://lojze.lugos.si/signor/">SIGNOR</a></td>
 <td><span class="citation" data-cites="dataset:vintar2012compiling">Vintar, Jerko, and Kulovec (<a href="#ref-dataset:vintar2012compiling" role="doc-biblioref">2012</a>)</span></td>
 <td>Slovene</td>
@@ -956,7 +969,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>80</td>
 <td><span style="background-color: red; color: white; padding: 0 2px !important;"><strong>TODO</strong></span> emailed Špela</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://www.phonetik.uni-muenchen.de/forschung/Bas/SIGNUM/">SIGNUM</a></td>
 <td><span class="citation" data-cites="dataset:von2007towards">Von Agris and Kraiss (<a href="#ref-dataset:von2007towards" role="doc-biblioref">2007</a>)</span></td>
 <td>German</td>
@@ -966,7 +979,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>20</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>SMILE</td>
 <td><span class="citation" data-cites="dataset:ebling2018smile">Ebling et al. (<a href="#ref-dataset:ebling2018smile" role="doc-biblioref">2018</a>)</span></td>
 <td>Swiss-German</td>
@@ -976,7 +989,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>30</td>
 <td><a href="https://zenodo.org/record/7701457">Custom</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://teckensprakskorpus.su.se">SSL Corpus</a></td>
 <td><span class="citation" data-cites="dataset:oqvist-etal-2020-sts">Öqvist, Riemer Kankkonen, and Mesch (<a href="#ref-dataset:oqvist-etal-2020-sts" role="doc-biblioref">2020</a>)</span></td>
 <td>Swedish</td>
@@ -986,7 +999,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://teckensprakslexikon.su.se/">SSL Lexicon</a></td>
 <td><span class="citation" data-cites="dataset:mesch2012meaning">Mesch and Wallin (<a href="#ref-dataset:mesch2012meaning" role="doc-biblioref">2012</a>)</span></td>
 <td>Swedish</td>
@@ -996,7 +1009,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td></td>
 <td><a href="https://creativecommons.org/licenses/by-nc-sa/2.5/se/">CC BY-NC-SA 2.5 SE</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="http://home.ustc.edu.cn/~hagjie/">Video-Based CSL</a></td>
 <td><span class="citation" data-cites="dataset:huang2018video">Huang et al. (<a href="#ref-dataset:huang2018video" role="doc-biblioref">2018</a>)</span></td>
 <td>Chinese</td>
@@ -1006,7 +1019,7 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 <td>50</td>
 <td><a href="https://rec.ustc.edu.cn/share/475ac440-dab7-11ea-963e-ebae3cfe5012">Research Attribution</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://dxli94.github.io/WLASL/">WLASL</a> <a href="https://github.com/sign-language-processing/datasets/tree/master/sign_language_datasets/datasets/wlasl">💾</a></td>
 <td><span class="citation" data-cites="dataset:li2020word">Li et al. (<a href="#ref-dataset:li2020word" role="doc-biblioref">2020</a>)</span></td>
 <td>American</td>
@@ -1188,6 +1201,9 @@ Try <a href="https://sign.mt">sign translate</a> to experience state-of-the art-
 </div>
 <div id="ref-dafnis2022bidirectional">
 <p>Dafnis, Konstantinos M, Evgenia Chroni, Carol Neidle, and Dimitris N Metaxas. 2022. “Bidirectional Skeleton-Based Isolated Sign Recognition Using Graph Convolution Networks.” In <em>Proceedings of the 13th Conference on Language Resources and Evaluation (Lrec 2022), Marseille, 20-25 June 2022.</em></p>
+</div>
+<div id="ref-dataset:dal2022lsa">
+<p>Dal Bianco, Pedro, Gastón Rı́os, Franco Ronchetti, Facundo Quiroga, Oscar Stanchi, Waldo Hasperué, and Alejandro Rosete. 2023. “LSA-T: The First Continuous Argentinian Sign Language Dataset for Sign Language Translation.” In <em>Advances in Artificial Intelligence – Iberamia 2022: 17th Ibero-American Conference on Ai, Cartagena de Indias, Colombia, November 23–25, 2022, Proceedings</em>, 293–304. Berlin, Heidelberg: Springer-Verlag. <a href="https://doi.org/10.1007/978-3-031-22419-5_25">https://doi.org/10.1007/978-3-031-22419-5_25</a>.</p>
 </div>
 <div id="ref-dataset:databases2007volumes">
 <p>Databases, NCSLGR. 2007. “Volumes 2–7.” American Sign Language Linguistic Research Project (Distributed on CD-ROM ….</p>
